@@ -1,0 +1,51 @@
+Context: When the output dir doesn't exist
+It: Creates the output dir
+Context: When the input dir doesn't exist
+It: Exits with error
+Context: When the script does not run within a source control repository
+It: Should issue a warning
+Context: When Checking the manuscript files
+It: Injects a scene separator between scenes based on the markdown in the files
+It: Creates a draft in the expected path
+Context: When only one file can go to the draft
+It: The file goes to the draft
+Context: When specifying not to version the manuscript
+It: Does not create a version
+Context: When a version is created
+It: Sets the version
+Context: When a version is not created
+It: Does not tag the head of the source control
+It: Ends the filename with the input dir's name
+Context: When a directory with the manuscript source files is not provided
+It: Should use the current directory as the source control directory
+Context: When there are unstaged/untracked changes
+It: Should not create a default version
+It: Should return a warning that a version won't be created for the generated document
+Context: When there are no unstaged/untracked changes
+It: Should create a default version
+Context: When the Draft and Revision arguments are specified
+It: Should create a version number in the format of Draft.Revision.1 where 1 is the build number
+Context: When call to versioning is executed with existing version, no draft and revision specified
+It: Draft and Revision numbers should remain the same and the build number should increment.
+Context: When call to versioning is executed with specified draft number and revision number
+It: Draft and Revision numbers should remain the same and the build number should increment
+Context: When revision number is incremented
+It: The build number should reset to 1
+Context: When call to versioning is executed only with Draft and Draft is greater than the previous draft number
+It: Should reset Revision to 1 and Build to 1
+Context: When call to versioning is executed with Draft and Revision, and Draft is greater than the previous draft number
+It: Should reset Revision to 1 and Build to 1, give a prompt where Y ignore the provided Revision in the script
+Context: When call to versioning is executed with Draft and Revision, and Draft is greater than the previous draft number
+It: Should reset Revision to 1 and Build to 1, give a prompt where no would exit with no version
+Context: When only a Revision is provided
+It: The draft number should not change
+Context: When only a Revision is provided and it is greater than the previous revision
+It: The build number should reset
+Context: When version data doesn't exist in the system
+It: Should return empty
+Context: When version data exists in the system
+It: Should return version
+Context: Return version from tag
+It: Last git tag: v1.0.0, it should return 1.0.0
+It: Last git tag: v1.10.10, it should return 1.10.10
+It: Last git tag: v10.10.101, it should return 10.10.101
