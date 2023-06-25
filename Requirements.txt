@@ -4,6 +4,7 @@ Context: When the input dir doesn't exist
 It: Exits with error
 Context: When the script does not run within a source control repository
 It: Should issue a warning
+
 Context: When Checking the manuscript files
 It: Injects a scene separator between scenes based on the markdown in the files
 It: Creates a draft in the expected path
@@ -15,12 +16,13 @@ Context: When a version is created
 It: Sets the version
 Context: When a version is not created
 It: Does not tag the head of the source control
-It: Ends the filename with the input dir's name
+It: Ends the filename with the input dirs name
 Context: When a directory with the manuscript source files is not provided
 It: Should use the current directory as the source control directory
+
 Context: When there are unstaged/untracked changes
 It: Should not create a default version
-It: Should return a warning that a version won't be created for the generated document
+It: Should return a warning that a version wont be created for the generated document
 Context: When there are no unstaged/untracked changes
 It: Should create a default version
 Context: When the Draft and Revision arguments are specified
@@ -41,7 +43,7 @@ Context: When only a Revision is provided
 It: The draft number should not change
 Context: When only a Revision is provided and it is greater than the previous revision
 It: The build number should reset
-Context: When version data doesn't exist in the system
+Context: When version data doesnt exist in the system
 It: Should return empty
 Context: When version data exists in the system
 It: Should return version

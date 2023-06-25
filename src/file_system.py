@@ -1,5 +1,4 @@
 import os
-import shutil
 
 class FileSystem:
     def __init__(self, base_path):

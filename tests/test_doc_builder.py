@@ -4,6 +4,8 @@ from unittest.mock import Mock
 import sys
 sys.path.append('src')
 from doc_builder import Builder
+from unittest.mock import patch
+import test_extensions
 
 class TestDocBuilder(TestCase):
 
@@ -45,3 +47,31 @@ class TestDocBuilder(TestCase):
             builder.build();
 
         self.assertEqual(str(err.exception), f"Input directory is not found {base_path}")
+
+    @patch('builtins.print')
+    def test_when_directory_is_not_a_git_repo_issue_warning(self, mock_print):
+        base_path = "/path/"
+        mock_file_system = Mock()
+        mock_file_system.directory_exists.side_effect = lambda path: False if path == ".git" else True
+
+        builder = Builder(base_path, Mock(), mock_file_system, Mock())
+        yellow_escape_sequence = "\033[33m"
+        reset_escape_sequence = "\033[0m"
+
+        builder.build()
+
+        mock_print.assert_called_once_with(f"{yellow_escape_sequence}This is not a git repository. Document will be generated but it will not be versioned.{reset_escape_sequence}")
+
+    @patch('builtins.print')
+    def test_when_directory_is_a_git_repo_do_not_issue_warning(self, mock_print):
+        base_path = "/path/"
+        mock_file_system = Mock()
+        mock_file_system.directory_exists.side_effect = lambda path: True if path == ".git" else True
+
+        builder = Builder(base_path, Mock(), mock_file_system, Mock())
+        yellow_escape_sequence = "\033[33m"
+        reset_escape_sequence = "\033[0m"
+
+        builder.build()
+
+        mock_print.assert_not_called_with(f"{yellow_escape_sequence}This is not a git repository. Document will be generated but it will not be versioned.{reset_escape_sequence}")
