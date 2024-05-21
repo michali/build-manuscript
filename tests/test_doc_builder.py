@@ -1,10 +1,10 @@
 import os
 from unittest import TestCase
 from unittest.mock import Mock
-import sys
-sys.path.append('src')
-from doc_builder import Builder
 from unittest.mock import patch
+import sys
+sys.path.append('../src')
+from doc_builder import Builder
 import test_extensions
 
 class TestDocBuilder(TestCase):
